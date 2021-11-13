@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return redirect('manager/login')
+    return redirect('login')
 
 
 def login_page(request):
