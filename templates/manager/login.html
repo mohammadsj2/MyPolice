@@ -28,6 +28,7 @@
         <h5 class="card-header">Login</h5>
         <div class="card-body">
             <form action="" method="post">
+                {% csrf_token %}
                 <p class="card-text">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="floatingInput" placeholder="Username" required>
