@@ -1,6 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-
 from manager.forms import LoginForm
 
 MANAGER_USERNAME = 'manager-username'
@@ -17,7 +15,7 @@ def home(request):
         return redirect('/manager/')
 
 
-def signout(request):
+def sign_out(request):
     if is_manager_logged_in(request):
         del request.session[MANAGER_USERNAME]
     return redirect('/manager/')
