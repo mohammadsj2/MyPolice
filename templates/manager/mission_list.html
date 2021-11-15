@@ -4,7 +4,7 @@
 
 {% block content %}
     <br/><br/><br/>
-    <div class="container">
+    <div class="container text-center">
         <table class="table">
             <thead>
                 <tr>
@@ -25,9 +25,7 @@
                 <tr>
 
                         <th>
-                            <a href="/manager/mission_profile/{{ mission.id }}">
-                                {{ mission.id }}
-                            </a>
+                            <a href="/manager/mission_profile/{{ mission.id }}" type="button" class="btn btn-info" style="width: 50pt">{{ mission.id }}</a>
                         </th>
                         <th>
                             {{ mission.location }}
@@ -43,8 +41,6 @@
         </table>
     </div>
     <div class="container">
-        <button type="button" class="btn btn-info">
-            <a href='/manager/create_mission' type="button" class="btn btn-link">Add Mission</a>
-        </button>
+        <a href='/manager/create_mission' type="button" class="btn btn-primary">Add Mission</a>
     </div>
 {% endblock %}
