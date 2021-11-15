@@ -1,0 +1,11 @@
+{% extends "manager/base.html" %}
+
+{% block title %} {{ mission.id }} {% endblock %}
+
+{% block content %}
+    <br/><br/><br/>
+    <div class="container">
+        <p>Id: {{ mission.id }}</p>
+    </div>
+    <a href='mission_profile/{{ mission.id }}/end_mission'></a>
+{% endblock %}
