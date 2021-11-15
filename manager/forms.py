@@ -15,6 +15,5 @@ class CreatePoliceForm(forms.Form):
 
 
 class CreateMissionForm(forms.Form):
-    description = forms.CharField(max_length=2000)
-    location = PlainLocationField(based_fields=['city'],
-                                  initial='-22.2876834,-49.1607606')
+    location = forms.CharField(label='Location (x, y)', max_length=40, required=True)
+    description = forms.CharField(max_length=200)

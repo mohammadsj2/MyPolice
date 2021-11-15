@@ -39,13 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'location_field.apps.DefaultConfig',
-    'manager.apps.ManagerConfig'
+    'manager.apps.ManagerConfig',
+    # 'mapbox_location_field',
 ]
+# MAPBOX_KEY = "pk.eyJ1IjoibW9oYW1tYWQtc2oiLCJhIjoiY2t3MG40cDFhNWdxdjJ1bXRlbXZ0eXA5MSJ9.xMsStZEFLft8d5l5EOgD2g"
 
-LOCATION_FIELD = {
-    'map.provider': 'openstreetmap',
-    'search.provider': 'nominatim',
-}
+
+# LOCATION_FIELD = {
+#     'map.provider': 'openstreetmap',
+#     'search.provider': 'nominatim',
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

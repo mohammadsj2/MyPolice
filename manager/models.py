@@ -1,9 +1,9 @@
 from django.db import models
-from location_field.models.plain import PlainLocationField
+
 
 # Create your models here.
 class Mission(models.Model):
-    location = PlainLocationField(based_fields=['city'], zoom=7)
+    location = models.CharField(max_length=40)
     start_time = models.DateTimeField(auto_now=False, auto_now_add=False)
     end_time = models.DateTimeField(auto_now=False, auto_now_add=False, blank=True, null=True)
     description = models.CharField(max_length=2000)
@@ -34,7 +34,3 @@ class MissionPolice(models.Model):
     def __str__(self) -> str:
         return str(self.mission) + " " + str(self.police) + " " + str(self.join_time)
 
-
-class Place(models.Model):
-    city = models.CharField(max_length=255)
-    location = PlainLocationField(based_fields=['city'], zoom=7)
