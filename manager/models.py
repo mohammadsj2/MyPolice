@@ -15,14 +15,14 @@ class Police(models.Model):
     password = models.CharField(max_length=200)
     name = models.CharField(max_length=200)
     gender = models.CharField(max_length=200)
-    age = models.CharField(max_length=200)
+    birthday = models.DateField(max_length=200, null=True)
     location = models.CharField(max_length=1000, blank=True, null=True)
     status = models.CharField(max_length=200, blank=True, null=True)
     current_mission = models.ForeignKey(Mission, on_delete=models.CASCADE, related_name='current_police', blank=True, null=True)
     missions = models.ManyToManyField(Mission, through='MissionPolice', related_name='all_police')
 
     def __str__(self) -> str:
-        return self.name
+        return f'username: {self.username}, password: {self.password}, name: {self.name}'
 
 class MissionPolice(models.Model):
     mission = models.ForeignKey(Mission, on_delete=models.CASCADE)

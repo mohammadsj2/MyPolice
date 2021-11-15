@@ -1,0 +1,43 @@
+{% extends "manager/base.html" %}
+
+
+
+{% block content %}
+
+    <br/><br/><br/>
+    <div class="card w-75 text-center mb-3 mx-auto" style="max-width: 25rem;">
+
+        <h5 class="card-header">Fill the police information</h5>
+
+        <div class="card-body">
+            {% if op_done %}
+                <div class="alert alert-success" role="alert">
+                    The police successfully created.
+                </div>
+            {% endif %}
+            {% if fail_message|length is not 0 %}
+                <div class="alert alert-danger" role="alert">
+                    Fail message: {{ fail_message }}
+                </div>
+            {% endif %}
+            <form action="" method="post">
+                {% csrf_token %}
+                <table class="card-text text-center">
+                    {% for field in form %}
+                        <p class="card-text">
+                            {{ field.errors }}
+                            <tr>
+                                <th>
+                                    <label for="{{ field.id_for_label }}"> {{ field.name }}</label>
+                                </th>
+                                <th>{{ field }}</th>
+                            </tr>
+                        </p>
+                    {% endfor %}
+                </table>
+                <input type="submit" class="btn btn-primary" value="Create">
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

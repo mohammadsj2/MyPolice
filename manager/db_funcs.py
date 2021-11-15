@@ -61,8 +61,8 @@ def end_mission(m: Mission, end_time=now()):
     m.end_time = end_time
     m.save()
 
-def create_police(username, password, name, gender, age):
-    p = Police(username=username, password=password, name=name, gender=gender, age=age)
+def create_police(username, password, name, gender, birthday):
+    p = Police(username=username, password=password, name=name, gender=gender, birthday=birthday)
     p.save()
     return p
 
@@ -82,8 +82,8 @@ def set_police_gender(p: Police, gender):
     p.gender = gender
     p.save()
 
-def set_police_age(p: Police, age):
-    p.age = age
+def set_police_birthday(p: Police, birthday):
+    p.birthday = birthday
     p.save()
 
 def set_police_location(p: Police, location):
