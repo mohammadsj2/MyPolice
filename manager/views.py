@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from manager.forms import LoginForm, CreatePoliceForm, CreateMissionForm, SendMessageForm
 from . import db_funcs
@@ -69,7 +70,8 @@ def create_police(request):
             birthday = form.cleaned_data['birthday']
 
             try:
-                db_funcs.create_police(username=username, password=password, name=name, gender=gender, birthday=birthday)
+                db_funcs.create_police(username=username, password=password, name=name, gender=gender,
+                                       birthday=birthday)
                 op_done = True
             except Exception as err:
                 op_done = False
@@ -81,7 +83,8 @@ def create_police(request):
     if op_done:
         form = CreatePoliceForm()
 
-    return render(request, 'manager/create_police.html', {'form': form, 'op_done': op_done, 'fail_message': fail_message})
+    return render(request, 'manager/create_police.html',
+                  {'form': form, 'op_done': op_done, 'fail_message': fail_message})
 
 
 def create_mission(request):
@@ -107,14 +110,17 @@ def create_mission(request):
     else:
         form = CreateMissionForm()
 
-    return render(request, 'manager/create_mission.html', {'form': form, 'op_done': op_done, 'fail_message': fail_message})
+    return render(request, 'manager/create_mission.html',
+                  {'form': form, 'op_done': op_done, 'fail_message': fail_message})
+
 
 def policemen_list(request):
     policemen = db_funcs.get_all_police()
     return render(request, 'manager/policemen_list.html',
                   {'policemen': policemen})
 
-def policemen_profile(request, username:str):
+
+def policemen_profile(request, username: str):
     op_done = False
     fail_message = ''
 
@@ -140,3 +146,11 @@ def policemen_profile(request, username:str):
 
     return render(request, 'manager/policemen_profile.html',
                   {'op_done': op_done, 'fail_message': fail_message, 'form': form, 'police': police})
+
+
+def mission_profile(request, mission_id):
+    return HttpResponse("Under Construction")
+
+
+def mission_list(request):
+    return HttpResponse("Under Construction")
