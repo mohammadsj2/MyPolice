@@ -5,11 +5,6 @@
 {% block content %}
 
     <br/><br/><br/>
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="submit">
-    </form>
     {{ form.media }}
     <div class="card w-75 text-center mb-3 mx-auto" style="max-width: 25rem;">
 
