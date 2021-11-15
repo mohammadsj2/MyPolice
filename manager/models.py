@@ -20,6 +20,7 @@ class Police(models.Model):
     status = models.CharField(max_length=200, blank=True, null=True)
     current_mission = models.ForeignKey(Mission, on_delete=models.CASCADE, related_name='current_police', blank=True, null=True)
     missions = models.ManyToManyField(Mission, through='MissionPolice', related_name='all_police')
+    message_from_server = models.CharField(max_length=2000, null=True)
 
     def __str__(self) -> str:
         return f'username: {self.username}, password: {self.password}, name: {self.name}'
@@ -32,4 +33,5 @@ class MissionPolice(models.Model):
 
     def __str__(self) -> str:
         return str(self.mission) + " " + str(self.police) + " " + str(self.join_time)
+
 
