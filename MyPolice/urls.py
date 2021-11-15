@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from MyPolice import views, settings
+
 urlpatterns = [
+    path('', views.index, name='index'),
     path('admin/', admin.site.urls),
     path('manager/', include('manager.urls')),
     path('police-officer/', include('police.urls')),
