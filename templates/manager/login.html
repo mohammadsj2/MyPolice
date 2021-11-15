@@ -29,18 +29,19 @@
         <div class="card-body">
             <form action="" method="post">
                 {% csrf_token %}
-                <p class="card-text">
-                    {{ form }}
-                    <!--
-                <div class="form-floating mb-3">
-                    <input type="text" name="username" class="form-control" id="{{ form.username.id_for_label }}" placeholder="Username" required>
-                    <label for="Username">Username</label>
-                </div>
-                <div class="form-floating">
-                    <input type="password" class="form-control" id="{{ form.password.id_for_label }}" placeholder="Password" required>
-                    <label for="Password">Password</label>
-                </div> -->
-                </p>
+                <table class="card-text text-center">
+                    {% for field in form %}
+                        <p class="card-text">
+                            {{ field.errors }}
+                            <tr>
+                                <th>
+                                    <label for="{{ field.id_for_label }}"> {{ field.name }}</label>
+                                </th>
+                                <th>{{ field }}</th>
+                            </tr>
+                        </p>
+                    {% endfor %}
+                </table>
                     <input type="submit" class="btn btn-primary" value="Login">
             </form>
         </div>

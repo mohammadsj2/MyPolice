@@ -11,22 +11,30 @@
 
         <div class="card-body">
             {% if op_done %}
-        <div class="alert alert-success" role="alert">
-            The police successfully created.
-        </div>
-    {% endif %}
-    {% if fail_message|length is not 0 %}
-        <div class="alert alert-danger" role="alert">
-            Fail message: {{ fail_message }}
-        </div>
-    {% endif %}
+                <div class="alert alert-success" role="alert">
+                    The police successfully created.
+                </div>
+            {% endif %}
+            {% if fail_message|length is not 0 %}
+                <div class="alert alert-danger" role="alert">
+                    Fail message: {{ fail_message }}
+                </div>
+            {% endif %}
             <form action="" method="post">
                 {% csrf_token %}
-                {% for field in form %}
-                    <p class="card-text">
-                        {{ field }}
-                    </p>
-                {% endfor %}
+                <table class="card-text text-center">
+                    {% for field in form %}
+                        <p class="card-text">
+                            {{ field.errors }}
+                            <tr>
+                                <th>
+                                    <label for="{{ field.id_for_label }}"> {{ field.name }}</label>
+                                </th>
+                                <th>{{ field }}</th>
+                            </tr>
+                        </p>
+                    {% endfor %}
+                </table>
                 <input type="submit" class="btn btn-primary" value="Create">
             </form>
         </div>
