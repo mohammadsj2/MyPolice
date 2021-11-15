@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from manager.forms import LoginForm, CreatePoliceForm
+from manager.forms import LoginForm, CreatePoliceForm, CreateMissionForm
 from . import db_funcs
 
 MANAGER_USERNAME = 'manager-username'
@@ -81,3 +81,29 @@ def create_police(request):
         form = CreatePoliceForm()
 
     return render(request, 'manager/create_police.html', {'form': form, 'op_done': op_done, 'fail_message': fail_message})
+
+
+def create_mission(request):
+    op_done = False
+    fail_message = ''
+
+    if not is_manager_logged_in(request):
+        return redirect('/manager/')
+
+    if request.method == 'POST':
+        print(request.POST)
+        form = CreateMissionForm(request.POST)
+        if form.is_valid():
+            print('yes')
+            #
+            # try:
+            #     db_funcs.create_police(username=username, password=password, name=name, gender=gender, birthday=birthday)
+            #     op_done = True
+            # except Exception as err:
+            #     op_done = False
+            #     fail_message = str(err)
+
+    else:
+        form = CreatePoliceForm()
+
+    return render(request, 'manager/create_mission.html', {'form': form, 'op_done': op_done, 'fail_message': fail_message})
