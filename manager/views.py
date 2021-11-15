@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from manager.forms import LoginForm, CreatePoliceForm, CreateMissionForm
+from manager.forms import LoginForm, CreatePoliceForm, CreateMissionForm, SendMessageForm
 from . import db_funcs
 from datetime import datetime
 
@@ -108,3 +108,35 @@ def create_mission(request):
         form = CreateMissionForm()
 
     return render(request, 'manager/create_mission.html', {'form': form, 'op_done': op_done, 'fail_message': fail_message})
+
+def policemen_list(request):
+    policemen = db_funcs.get_all_police()
+    return render(request, 'manager/policemen_list.html',
+                  {'policemen': policemen})
+
+def policemen_profile(request, username:str):
+    op_done = False
+    fail_message = ''
+
+    if not is_manager_logged_in(request):
+        return redirect('/manager/')
+
+    police = db_funcs.get_police_username(username=username)
+
+    if request.method == 'POST':
+        print(request.POST)
+        form = SendMessageForm(request.POST)
+        if form.is_valid():
+            text = form.cleaned_data['text']
+            try:
+                police.message_from_server = text
+                police.save()
+                op_done = True
+            except Exception as err:
+                op_done = False
+                fail_message = str(err)
+    else:
+        form = SendMessageForm()
+
+    return render(request, 'manager/policemen_profile.html',
+                  {'op_done': op_done, 'fail_message': fail_message, 'form': form, 'police': police})

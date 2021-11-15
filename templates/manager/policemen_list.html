@@ -1,0 +1,36 @@
+{% extends "manager/base.html" %}
+
+{% block title %} {{ police.username }} {% endblock %}
+
+{% block content %}
+    <br/><br/><br/>
+    <div class="container">
+        <table>
+            <tr>
+                <th>
+                    username
+                </th>
+                <th>
+                    name
+                </th>
+            </tr>
+            {% for police in policemen %}
+
+                <tr>
+
+                        <th>
+                            <a href="/manager/policemen_profile/{{ police.username }}">
+                                {{ police.username }}
+                            </a>
+                        </th>
+                        <th>
+                            {{ police.name }}
+                        </th>
+
+                </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}

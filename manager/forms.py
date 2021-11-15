@@ -17,3 +17,6 @@ class CreatePoliceForm(forms.Form):
 class CreateMissionForm(forms.Form):
     location = forms.CharField(label='Location (x, y)', max_length=40, required=True)
     description = forms.CharField(max_length=200)
+
+class SendMessageForm(forms.Form):
+    text = forms.CharField(label='Text', widget=forms.Textarea, max_length=2000, required=True)
