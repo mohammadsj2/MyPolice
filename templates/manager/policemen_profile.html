@@ -1,0 +1,15 @@
+{% extends "manager/base.html" %}
+
+{% block title %} {{ police.username }} {% endblock %}
+
+{% block content %}
+    <br/><br/><br/>
+    <div class="container">
+        <p>username: {{ police.username }}</p>
+        <p>name: {{ police.name }}</p>
+        <p>gender: {{ police.gender }}</p>
+        <p>birthday: {{ police.birthday }}</p>
+        <p>location: {{ police.location }}</p>
+        <p>status: {{ police.status }}</p>
+    </div>
+{% endblock %}
