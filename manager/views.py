@@ -156,9 +156,9 @@ def mission_profile(request, mission_id):
     return render(request, 'manager/mission_profile.html', {'mission': mission})
 
 
-
 def mission_list(request):
-    return HttpResponse("Under Construction")
+    missions = db_funcs.get_all_missions()
+    return render(request, 'manager/mission_list.html', {'missions': missions})
 
 
 def end_mission(request, mission_id: int):
