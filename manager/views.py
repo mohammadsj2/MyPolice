@@ -108,3 +108,8 @@ def create_mission(request):
         form = CreateMissionForm()
 
     return render(request, 'manager/create_mission.html', {'form': form, 'op_done': op_done, 'fail_message': fail_message})
+
+
+def policemen_profile(request, username:str):
+    police = db_funcs.get_police_username(username=username)
+    return render(request, 'manager/policemen_profile.html', {'police': police})
