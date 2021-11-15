@@ -37,8 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'location_field.apps.DefaultConfig',
     'manager.apps.ManagerConfig'
 ]
+
+LOCATION_FIELD = {
+    'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
+    'provider.google.api_key': '<PLACE YOUR API KEY HERE>',
+    'provider.google.api_libraries': '',
+    'provider.google.map.type': 'ROADMAP',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
