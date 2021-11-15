@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from manager.forms import LoginForm, CreatePoliceForm, CreateMissionForm
 from . import db_funcs
+from datetime import datetime
 
 MANAGER_USERNAME = 'manager-username'
 
@@ -94,15 +95,15 @@ def create_mission(request):
         print(request.POST)
         form = CreateMissionForm(request.POST)
         if form.is_valid():
-            print('yes')
-            #
-            # try:
-            #     db_funcs.create_police(username=username, password=password, name=name, gender=gender, birthday=birthday)
-            #     op_done = True
-            # except Exception as err:
-            #     op_done = False
-            #     fail_message = str(err)
-
+            loc = form.cleaned_data['location']
+            description = form.cleaned_data['description']
+            start_time = datetime.now()
+            try:
+                db_funcs.create_mission(loc=loc, st=start_time, desc=description)
+                op_done = True
+            except Exception as err:
+                op_done = False
+                fail_message = str(err)
     else:
         form = CreateMissionForm()
 
