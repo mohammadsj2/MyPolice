@@ -6,16 +6,28 @@
 
     <br/><br/><br/>
     <div class="card w-75 text-center mb-3 mx-auto" style="max-width: 25rem;">
+
         <h5 class="card-header">Fill the police information</h5>
+
         <div class="card-body">
+            {% if op_done %}
+        <div class="alert alert-success" role="alert">
+            The police successfully created.
+        </div>
+    {% endif %}
+    {% if fail_message|length is not 0 %}
+        <div class="alert alert-danger" role="alert">
+            Fail message: {{ fail_message }}
+        </div>
+    {% endif %}
             <form action="" method="post">
                 {% csrf_token %}
                 {% for field in form %}
                     <p class="card-text">
-                    {{ field }}
+                        {{ field }}
                     </p>
                 {% endfor %}
-                <input type="submit" class="btn btn-primary" value="Login">
+                <input type="submit" class="btn btn-primary" value="Create">
             </form>
         </div>
     </div>
