@@ -104,6 +104,6 @@ def create_mission(request):
             #     fail_message = str(err)
 
     else:
-        form = CreatePoliceForm()
+        form = CreateMissionForm()
 
     return render(request, 'manager/create_mission.html', {'form': form, 'op_done': op_done, 'fail_message': fail_message})

@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(Mission)
 admin.site.register(MissionPolice)
 admin.site.register(Police)
+admin.site.register(Place)

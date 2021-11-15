@@ -43,10 +43,8 @@ INSTALLED_APPS = [
 ]
 
 LOCATION_FIELD = {
-    'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
-    'provider.google.api_key': 'AIzaSyBu1YebK3tJN5p9wcshvAkDo3d2rwAEITE',
-    'provider.google.api_libraries': '',
-    'provider.google.map.type': 'ROADMAP',
+    'map.provider': 'openstreetmap',
+    'search.provider': 'nominatim',
 }
 
 MIDDLEWARE = [

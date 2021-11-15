@@ -33,3 +33,8 @@ class MissionPolice(models.Model):
 
     def __str__(self) -> str:
         return str(self.mission) + " " + str(self.police) + " " + str(self.join_time)
+
+
+class Place(models.Model):
+    city = models.CharField(max_length=255)
+    location = PlainLocationField(based_fields=['city'], zoom=7)
