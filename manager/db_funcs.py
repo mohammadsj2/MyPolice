@@ -28,12 +28,13 @@ def get_missions_by_loc(loc):
 
 def get_mission_current_police(m: Mission):
     try:
-        all_police = MissionPolice.objects.get(mission=m)
+        all_police = MissionPolice.objects.all()
     except:
         all_police = []
+    print(all_police)
     active_police = []
     for p in all_police:
-        if p.leave_time is None:
+        if p.mission == m and p.leave_time is None:
             active_police.append(p.police)
     return active_police
 
