@@ -7,7 +7,7 @@ class LoginForm(forms.Form):
 
 
 class CreatePoliceForm(forms.Form):
-    username = forms.CharField(max_length=200, unique=True, required=True)
+    username = forms.CharField(max_length=200, required=True)
     password = forms.CharField(max_length=200, required=True)
     name = forms.CharField(max_length=200, required=True)
     gender = forms.ChoiceField(choices=('Man', 'Female', 'Other'), required=True)
