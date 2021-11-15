@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Mission(models.Model):
-    location = models.CharField(max_length=1000)
+    location = models.CharField(max_length=40)
     start_time = models.DateTimeField(auto_now=False, auto_now_add=False)
     end_time = models.DateTimeField(auto_now=False, auto_now_add=False, blank=True, null=True)
     description = models.CharField(max_length=2000)
@@ -32,3 +32,4 @@ class MissionPolice(models.Model):
 
     def __str__(self) -> str:
         return str(self.mission) + " " + str(self.police) + " " + str(self.join_time)
+
