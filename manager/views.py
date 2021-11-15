@@ -51,6 +51,9 @@ def login_page(request):
 
 
 def create_police(request):
+    op_done = False
+    fail_message = ''
+
     if not is_manager_logged_in(request):
         return redirect('/manager/')
 
@@ -63,9 +66,18 @@ def create_police(request):
             name = form.cleaned_data['name']
             gender = form.cleaned_data['gender']
             birthday = form.cleaned_data['birthday']
-            db_funcs.create_police(username=username, password=password, name=name, gender=gender, birthday=birthday)
-            return redirect('/manager/home/')
+
+            try:
+                db_funcs.create_police(username=username, password=password, name=name, gender=gender, birthday=birthday)
+                op_done = True
+            except Exception as err:
+                op_done = False
+                fail_message = str(err)
+
     else:
         form = CreatePoliceForm()
 
-    return render(request, 'manager/create_police.html', {'form': form})
+    if op_done:
+        form = CreatePoliceForm()
+
+    return render(request, 'manager/create_police.html', {'form': form, 'op_done': op_done, 'fail_message': fail_message})
