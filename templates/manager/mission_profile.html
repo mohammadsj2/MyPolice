@@ -6,6 +6,12 @@
     <br/><br/><br/>
     <div class="container">
         <p>Id: {{ mission.id }}</p>
+        <p>Description: {{ mission.description }}</p>
     </div>
-    <a href='mission_profile/{{ mission.id }}/end_mission'></a>
+    <div class="container">
+
+        <button type="button" class="btn btn-info">
+            <a href='/manager/mission_profile/{{ mission.id }}/end_mission' type="button" class="btn btn-link">End Mission</a>
+        </button>
+    </div>
 {% endblock %}

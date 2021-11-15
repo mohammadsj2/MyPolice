@@ -167,4 +167,4 @@ def end_mission(request, mission_id: int):
 
     mission = db_funcs.get_mission(id=mission_id)
     db_funcs.end_mission(m=mission, end_time=datetime.now())
-    return render(request, 'manager/mission_list.html')
+    return redirect('/manager/')

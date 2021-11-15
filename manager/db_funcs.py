@@ -1,51 +1,67 @@
 from .models import *
 from django.utils.timezone import now
 
+
 def get_all_police():
     return Police.objects.all()
+
 
 def get_police(id):
     return Police.objects.get(pk=id)
 
+
 def get_police_username(username):
     return Police.objects.get(username=username)
+
 
 def get_all_missions():
     return Mission.objects.all()
 
+
 def get_mission(id):
     return Mission.objects.get(id=id)
+
 
 def get_missions_by_loc(loc):
     return Mission.objects.filter(location=loc)
 
+
 def get_mission_current_police(m: Mission):
-    all_police = MissionPolice.objects.get(mission=m)
+    try:
+        all_police = MissionPolice.objects.get(mission=m)
+    except:
+        all_police = []
     active_police = []
     for p in all_police:
         if p.leave_time is None:
             active_police.append(p.police)
     return active_police
 
+
 def get_mission_all_police(m: Mission):
     return m.all_police.all()
+
 
 def create_mission(loc, st=now(), desc=''):
     m = Mission(location=loc, start_time=st, description=desc)
     m.save()
     return m
 
+
 def set_mission_loc(m: Mission, loc):
     m.location = loc
     m.save()
+
 
 def set_mission_desc(m: Mission, desc):
     m.description = desc
     m.save()
 
+
 def assign_police(m: Mission, p: Police, join_time=now()):
     m.current_police.add(p)
-    m.all_police.add(p, through_defaults={"join_time":join_time})
+    m.all_police.add(p, through_defaults={"join_time": join_time})
+
 
 def create_mission_assign_police(police_list: list, loc, st=now(), desc=''):
     m = create_mission(loc, st, desc)
@@ -53,11 +69,13 @@ def create_mission_assign_police(police_list: list, loc, st=now(), desc=''):
         assign_police(m, p, st)
     return m
 
+
 def unassign_police(m: Mission, p: Police, leave_time=now()):
     mp = MissionPolice.objects.get(mission=m, police=p)
     mp.leave_time = leave_time
     mp.save()
     return mp
+
 
 def end_mission(m: Mission, end_time=now()):
     for p in get_mission_current_police(m):
@@ -65,34 +83,42 @@ def end_mission(m: Mission, end_time=now()):
     m.end_time = end_time
     m.save()
 
+
 def create_police(username, password, name, gender, birthday):
     p = Police(username=username, password=password, name=name, gender=gender, birthday=birthday)
     p.save()
     return p
 
+
 def set_police_username(p: Police, username):
     p.username = username
     p.save()
+
 
 def set_police_password(p: Police, password):
     p.password = password
     p.save()
 
+
 def set_police_name(p: Police, name):
     p.name = name
     p.save()
+
 
 def set_police_gender(p: Police, gender):
     p.gender = gender
     p.save()
 
+
 def set_police_birthday(p: Police, birthday):
     p.birthday = birthday
     p.save()
 
+
 def set_police_location(p: Police, location):
     p.location = location
     p.save()
+
 
 def set_police_status(p: Police, status):
     p.status = status
