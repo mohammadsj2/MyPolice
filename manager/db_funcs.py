@@ -20,7 +20,12 @@ def get_missions_by_loc(loc):
     return Mission.objects.filter(location=loc)
 
 def get_mission_current_police(m: Mission):
-    return m.current_police.all()
+    all_police = MissionPolice.objects.get(mission=m)
+    active_police = []
+    for p in all_police:
+        if p.leave_time is None:
+            active_police.append(p.police)
+    return active_police
 
 def get_mission_all_police(m: Mission):
     return m.all_police.all()
@@ -52,7 +57,6 @@ def unassign_police(m: Mission, p: Police, leave_time=now()):
     mp = MissionPolice.objects.get(mission=m, police=p)
     mp.leave_time = leave_time
     mp.save()
-    m.current_police.remove(p)
     return mp
 
 def end_mission(m: Mission, end_time=now()):
