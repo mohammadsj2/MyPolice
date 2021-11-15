@@ -109,6 +109,10 @@ def create_mission(request):
 
     return render(request, 'manager/create_mission.html', {'form': form, 'op_done': op_done, 'fail_message': fail_message})
 
+def policemen_list(request):
+    policemen = db_funcs.get_all_police()
+    return render(request, 'manager/policemen_list.html',
+                  {'policemen': policemen})
 
 def policemen_profile(request, username:str):
     op_done = False
