@@ -14,7 +14,7 @@ def get_all_missions():
     return Mission.objects.all()
 
 def get_mission(id):
-    return Mission.objects.get(pk=id)
+    return Mission.objects.get(id=id)
 
 def get_missions_by_loc(loc):
     return Mission.objects.filter(location=loc)

@@ -149,8 +149,22 @@ def policemen_profile(request, username: str):
 
 
 def mission_profile(request, mission_id):
-    return HttpResponse("Under Construction")
+    if not is_manager_logged_in(request):
+        return redirect('/manager/')
+
+    mission = db_funcs.get_mission(id=mission_id)
+    return render(request, 'manager/mission_profile.html', {'mission': mission})
+
 
 
 def mission_list(request):
     return HttpResponse("Under Construction")
+
+
+def end_mission(request, mission_id: int):
+    if not is_manager_logged_in(request):
+        return redirect('/manager/')
+
+    mission = db_funcs.get_mission(id=mission_id)
+    db_funcs.end_mission(m=mission, end_time=datetime.now())
+    return render(request, 'manager/mission_list.html')
