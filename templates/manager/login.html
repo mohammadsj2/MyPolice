@@ -14,7 +14,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" aria-current="page" href="/manager/">Home</a>
                     </li>
                 </ul>
             </div>
@@ -30,16 +30,18 @@
             <form action="" method="post">
                 {% csrf_token %}
                 <p class="card-text">
+                    {{ form }}
+                    <!--
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="Username" required>
-                    <label for="floatingInput">Username</label>
+                    <input type="text" name="username" class="form-control" id="{{ form.username.id_for_label }}" placeholder="Username" required>
+                    <label for="Username">Username</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
-                    <label for="floatingPassword">Password</label>
+                    <input type="password" class="form-control" id="{{ form.password.id_for_label }}" placeholder="Password" required>
+                    <label for="Password">Password</label>
                 </div>
-                </p>
-                <input type="submit" class="btn btn-primary" value="Login">
+                </p> -->
+                    <input type="submit" class="btn btn-primary" value="Login">
             </form>
         </div>
     </div>
