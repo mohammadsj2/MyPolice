@@ -70,4 +70,4 @@ def notifications(request):
     
     police: Police = db_funcs.get_police_by_username(request.session[USERNAME_FIELD])
     message = police.message_from_server
-    return render(request, 'police/mission.html', {'message': message})
+    return render(request, 'police/notifications.html', {'message': message})
