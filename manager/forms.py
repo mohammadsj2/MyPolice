@@ -1,5 +1,5 @@
 from django import forms
-from location_field.forms.plain import PlainLocationField
+# from location_field.forms.plain import PlainLocationField
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='Username', max_length=100)

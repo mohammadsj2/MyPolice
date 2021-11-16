@@ -20,7 +20,7 @@ class Police(models.Model):
     location = models.CharField(max_length=1000, blank=True, null=True)
     status = models.CharField(max_length=200, blank=True, null=True)
     current_mission = models.ForeignKey(Mission, on_delete=models.CASCADE, related_name='current_police', blank=True, null=True)
-    # missions = models.ManyToManyField(Mission, through='MissionPolice', related_name='all_police')
+    missions = models.ManyToManyField(Mission, through='MissionPolice', related_name='all_police')
     message_from_server = models.CharField(max_length=2000, null=True, blank=True)
 
     def __str__(self) -> str:
