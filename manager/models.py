@@ -18,7 +18,7 @@ class Police(models.Model):
     gender = models.CharField(max_length=200)
     birthday = models.DateField(max_length=200, null=True)
     location = models.CharField(max_length=1000, blank=True, null=True)
-    status = models.CharField(max_length=200, blank=True, null=True)
+    status = models.CharField(max_length=200, blank=True, null=True, default='available')
     current_mission = models.ForeignKey(Mission, on_delete=models.CASCADE, related_name='current_police', blank=True, null=True)
     missions = models.ManyToManyField(Mission, through='MissionPolice', related_name='all_police')
     message_from_server = models.CharField(max_length=2000, null=True, blank=True)

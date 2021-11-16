@@ -20,3 +20,7 @@ class CreateMissionForm(forms.Form):
 
 class SendMessageForm(forms.Form):
     text = forms.CharField(label='Text', widget=forms.Textarea, max_length=2000, required=True)
+
+class PoliceAssignForm(forms.Form):
+    police = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
+                                          choices=[])

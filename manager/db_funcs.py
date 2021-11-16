@@ -5,6 +5,8 @@ from django.utils.timezone import now
 def get_all_police():
     return Police.objects.all()
 
+def get_available_police():
+    return Police.objects.filter(status='available')
 
 def get_police(id):
     return Police.objects.get(pk=id)
@@ -52,6 +54,8 @@ def set_mission_desc(m: Mission, desc):
 
 def assign_police(m: Mission, p: Police, join_time=now()):
     m.current_police.add(p)
+    p.status = 'unavailable'
+    p.save()
     m.all_police.add(p, through_defaults={"join_time": join_time})
 
 
@@ -63,6 +67,8 @@ def create_mission_assign_police(police_list: list, loc, st=now(), desc=''):
 
 
 def unassign_police(m: Mission, p: Police, leave_time=now()):
+    p.status = 'available'
+    p.save()
     mp = MissionPolice.objects.get(mission=m, police=p)
     mp.leave_time = leave_time
     mp.save()
@@ -77,7 +83,7 @@ def end_mission(m: Mission, end_time=now()):
 
 
 def create_police(username, password, name, gender, birthday):
-    p = Police(username=username, password=password, name=name, gender=gender, birthday=birthday)
+    p = Police(username=username, password=password, name=name, gender=gender, birthday=birthday, status='available')
     p.save()
     return p
 

@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from manager.forms import LoginForm, CreatePoliceForm, CreateMissionForm, SendMessageForm
+from manager.forms import LoginForm, CreatePoliceForm, CreateMissionForm, PoliceAssignForm, SendMessageForm
 from . import db_funcs
 from datetime import datetime
 
@@ -155,8 +155,9 @@ def mission_profile(request, mission_id):
     mission = db_funcs.get_mission(id=mission_id)
     is_assigned = len(db_funcs.get_mission_current_police(mission)) != 0
     policemen = db_funcs.get_all_police()
+    form = PoliceAssignForm(initial={'choices': db_funcs.get_available_police()})
     return render(request, 'manager/mission_profile.html',
-                  {'mission': mission, 'is_assigned': is_assigned, 'policemen': policemen})
+                  {'mission': mission, 'is_assigned': is_assigned, 'policemen': policemen, 'form': form})
 
 
 def mission_list(request):
