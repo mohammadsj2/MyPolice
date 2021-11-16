@@ -1,0 +1,46 @@
+{% extends "manager/base.html" %}
+
+{% block title %} Missions List {% endblock %}
+
+{% block content %}
+    <br/><br/><br/>
+    <div class="container text-center">
+        <table class="table">
+            <thead>
+                <tr>
+                <th>
+                    Mission id
+                </th>
+                <th>
+                    Mission location
+                </th>
+                <th>
+                    Description
+                </th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for mission in missions %}
+
+                <tr>
+
+                        <th>
+                            <a href="/manager/mission_profile/{{ mission.id }}" type="button" class="btn btn-info" style="width: 50pt">{{ mission.id }}</a>
+                        </th>
+                        <th>
+                            {{ mission.location }}
+                        </th>
+                        <th>
+                            {{ mission.description }}
+                        </th>
+
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <a href='/manager/create_mission' type="button" class="btn btn-primary">Add Mission</a>
+    </div>
+{% endblock %}
