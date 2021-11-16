@@ -127,7 +127,7 @@ def policemen_profile(request, username: str):
     if not is_manager_logged_in(request):
         return redirect('/manager/')
 
-    police = db_funcs.get_police_username(username=username)
+    police = db_funcs.get_police_by_username(username=username)
 
     if request.method == 'POST':
         print(request.POST)
