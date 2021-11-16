@@ -151,21 +151,29 @@ def policemen_profile(request, username: str):
 def mission_profile(request, mission_id):
     if not is_manager_logged_in(request):
         return redirect('/manager/')
+    op_done = False
+    fail_message = ""
 
     mission = db_funcs.get_mission(id=mission_id)
-    is_assigned = len(db_funcs.get_mission_current_police(mission)) != 0
-    policemen = db_funcs.get_all_police()
+    assigned_police = db_funcs.get_mission_current_police(mission)
     if request.method == 'POST':
         print(request.POST)
         form = PoliceAssignForm(request.POST)
         if form.is_valid():
-            police = form.cleaned_data['police']
-            
-            
+            policemen = form.cleaned_data['police']
+            try:
+                print(policemen)
+                for police in policemen:
+                    db_funcs.assign_police(mission, police)
+                op_done = True
+            except Exception as err:
+                op_done = False
+                fail_message = str(err)
     else:
         form = PoliceAssignForm()
     return render(request, 'manager/mission_profile.html',
-                  {'mission': mission, 'is_assigned': is_assigned, 'policemen': policemen, 'form': form})
+                  {'mission': mission, 'assigned_police': assigned_police, 'form': form, 'op_done': op_done,
+                   'fail_message': fail_message})
 
 
 def mission_list(request):
