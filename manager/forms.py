@@ -1,4 +1,7 @@
 from django import forms
+from manager import db_funcs
+
+from manager.models import Police
 # from location_field.forms.plain import PlainLocationField
 
 class LoginForm(forms.Form):
@@ -22,5 +25,8 @@ class SendMessageForm(forms.Form):
     text = forms.CharField(label='Text', widget=forms.Textarea, max_length=2000, required=True)
 
 class PoliceAssignForm(forms.Form):
-    police = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,
-                                          choices=[])
+    police = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple)
+
+    def __init__(self, *args, **kwargs):
+        self.fields['police'].queryset = db_funcs.get_available_police()
+    

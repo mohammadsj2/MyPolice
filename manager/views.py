@@ -155,7 +155,7 @@ def mission_profile(request, mission_id):
     mission = db_funcs.get_mission(id=mission_id)
     is_assigned = len(db_funcs.get_mission_current_police(mission)) != 0
     policemen = db_funcs.get_all_police()
-    form = PoliceAssignForm(initial={'choices': db_funcs.get_available_police()})
+    form = PoliceAssignForm()
     return render(request, 'manager/mission_profile.html',
                   {'mission': mission, 'is_assigned': is_assigned, 'policemen': policemen, 'form': form})
 
