@@ -14,7 +14,8 @@ def index(request):
 
 def home(request):
     if is_user_logged_in(request):
-        return render(request, 'police/home.html', {})
+        return render(request, 'police/home.html',
+                      {'name': db_funcs.get_police_by_username(request.session[USERNAME_FIELD]).name})
     else:
         return redirect('/police/')
 
