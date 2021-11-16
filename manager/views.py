@@ -153,7 +153,10 @@ def mission_profile(request, mission_id):
         return redirect('/manager/')
 
     mission = db_funcs.get_mission(id=mission_id)
-    return render(request, 'manager/mission_profile.html', {'mission': mission})
+    is_assigned = len(db_funcs.get_mission_current_police(mission)) != 0
+    policemen = db_funcs.get_all_police()
+    return render(request, 'manager/mission_profile.html',
+                  {'mission': mission, 'is_assigned': is_assigned, 'policemen': policemen})
 
 
 def mission_list(request):

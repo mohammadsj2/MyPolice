@@ -9,9 +9,17 @@
         <p>Description: {{ mission.description }}</p>
     </div>
     <div class="container">
-
+        {% if mission.end_time == null%}
         <button type="button" class="btn btn-info">
             <a href='/manager/mission_profile/{{ mission.id }}/end_mission' type="button" class="btn btn-link">End Mission</a>
         </button>
+        {% endif %}
     </div>
+    <div>
+        {% if not is_assigned %}
+
+        {%  endif %}
+    </div>
+
+
 {% endblock %}
