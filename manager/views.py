@@ -155,7 +155,10 @@ def mission_profile(request, mission_id):
     fail_message = ""
 
     mission = db_funcs.get_mission(id=mission_id)
-    assigned_police = db_funcs.get_mission_current_police(mission)
+    if mission.end_time:
+        assigned_police = db_funcs.get_mission_all_police(mission)
+    else:
+        assigned_police = db_funcs.get_mission_current_police(mission)
     if request.method == 'POST':
         print(request.POST)
         form = PoliceAssignForm(request.POST)
