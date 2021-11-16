@@ -3,6 +3,8 @@ import manager.db_funcs as db_funcs
 from manager.forms import LoginForm
 from django.http import HttpResponse
 
+from manager.models import Police
+
 USERNAME_FIELD = "username"
 
 
@@ -12,10 +14,18 @@ def index(request):
 
 def home(request):
     if is_user_logged_in(request):
-        return render(request, 'police/home.html', {})
+        return render(request, 'police/home.html',
+                      {'name': db_funcs.get_police_by_username(request.session[USERNAME_FIELD]).name})
     else:
         return redirect('/police/')
 
+def mission(request):
+    if not is_user_logged_in(request):
+        return redirect('/police/')
+    
+    police: Police = db_funcs.get_police_by_username(request.session[USERNAME_FIELD])
+    mission = police.current_mission
+    return render(request, 'police/mission.html', {'mission': mission})
 
 def sign_out(request):
     if is_user_logged_in(request):

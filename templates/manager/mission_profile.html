@@ -6,6 +6,13 @@
     <br/><br/><br/>
     <div class="container">
         <p>Id: {{ mission.id }}</p>
+        <p>Start time: {{ mission.start_time }}</p>
+        {% if mission.end_time %}
+          <p>End time: {{ mission.end_time }}</p>
+            <p> Mission status: finished</p>
+        {% else %}
+            <p> Mission status: in progress</p>
+        {% endif %}
         <p>Description: {{ mission.description }}</p>
     </div>
     <div class="container">
@@ -17,7 +24,7 @@
         {% endif %}
     </div>
     <div class="container">
-        {% if not assigned_police %}
+        {% if not assigned_police%}
             <form target="" method='post'>
                 {% csrf_token %}
                 {{ form.as_p }}

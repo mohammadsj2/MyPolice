@@ -1,0 +1,16 @@
+{% extends "police/base.html" %}
+
+{% block title %}Mission{% endblock %}
+
+{% block content %}
+    <br/><br/><br/>
+    <div class="card w-75 text-center mb-3 mx-auto" style="max-width: 22rem;">
+        <h5 class="card-header">Current Mission</h5>
+        {% if mission %}
+        <div class="card-body">
+            <p> Mission location: {{ mission.location}}</p>
+            <p> Mission Description: {{ mission.description}}</p>
+        </div>
+        {% endif %}
+    </div>
+{% endblock %}
