@@ -22,5 +22,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('admin/', admin.site.urls),
     path('manager/', include('manager.urls')),
-    path('police-officer/', include('police.urls')),
+    path('police/', include('police.urls')),
 ]

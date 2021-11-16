@@ -12,9 +12,11 @@ def get_police(id):
     return Police.objects.get(pk=id)
 
 
-def get_police_username(username):
-    return Police.objects.get(username=username)
-
+def get_police_by_username(username):
+    try:
+        return Police.objects.get(username=username)
+    except Exception:
+        return None
 
 def get_all_missions():
     return Mission.objects.all()
