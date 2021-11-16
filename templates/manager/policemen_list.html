@@ -1,36 +1,42 @@
 {% extends "manager/base.html" %}
 
-{% block title %} {{ police.username }} {% endblock %}
+{% block title %} PolicemenList {% endblock %}
 
 {% block content %}
     <br/><br/><br/>
     <div class="container">
-        <table>
+        <table class="table text-center">
+            <thead>
             <tr>
                 <th>
-                    username
+                    Username
                 </th>
                 <th>
-                    name
+                    Officer Name
                 </th>
             </tr>
+            </thead>
+            <tbody>
             {% for police in policemen %}
 
                 <tr>
 
-                        <th>
-                            <a href="/manager/policemen_profile/{{ police.username }}">
-                                {{ police.username }}
-                            </a>
-                        </th>
-                        <th>
-                            {{ police.name }}
-                        </th>
+                    <th>
+                        <a href="/manager/policemen_profile/{{ police.username }}" type="button" class="btn btn-info">
+                            {{ police.username }}
+                        </a>
+                    </th>
+                    <th>
+                        {{ police.name }}
+                    </th>
 
                 </tr>
 
             {% endfor %}
+            </tbody>
         </table>
     </div>
-
+    <div class="container">
+        <a href='/manager/create_police' type="button" class="btn btn-primary">Create new officer account</a>
+    </div>
 {% endblock %}
