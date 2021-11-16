@@ -74,6 +74,7 @@ def unassign_police(m: Mission, p: Police, leave_time=now()):
     mp = MissionPolice.objects.get(mission=m, police=p)
     mp.leave_time = leave_time
     mp.save()
+    m.current_police.remove(p)
     return mp
 
 
