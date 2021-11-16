@@ -24,7 +24,7 @@ class Police(models.Model):
     message_from_server = models.CharField(max_length=2000, null=True, blank=True)
 
     def __str__(self) -> str:
-        return f'username: {self.username}, password: {self.password}, name: {self.name}'
+        return f'{self.name}'
 
 class MissionPolice(models.Model):
     mission = models.ForeignKey(Mission, on_delete=models.CASCADE)

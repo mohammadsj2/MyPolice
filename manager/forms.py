@@ -1,4 +1,5 @@
-from django import forms
+from django import db, forms
+from django.forms.forms import Form
 from manager import db_funcs
 
 from manager.models import Police
@@ -25,8 +26,11 @@ class SendMessageForm(forms.Form):
     text = forms.CharField(label='Text', widget=forms.Textarea, max_length=2000, required=True)
 
 class PoliceAssignForm(forms.Form):
-    police = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple)
-
-    def __init__(self, *args, **kwargs):
-        self.fields['police'].queryset = db_funcs.get_available_police()
+    #  def __init__(self, attrs=None):
+    #     police = db_funcs.get_available_police()
+    #     widgets = [
+    #         forms.Select(attrs=attrs, choices=police),
+    #     ]
+    #     super().__init__(widgets, attrs)
+    police = forms.ModelMultipleChoiceField(queryset=db_funcs.get_available_police())
     
