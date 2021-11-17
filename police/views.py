@@ -14,18 +14,30 @@ def index(request):
 
 def home(request):
     if is_user_logged_in(request):
+        if request.method == 'POST':
+            print(request.POST)
+
+            latitude = request.POST["lat"]
+            longitude = request.POST["long"]
+            try:
+                police = db_funcs.get_police_by_username(request.session[USERNAME_FIELD])
+                db_funcs.set_police_location(police, latitude + ', ' + longitude)
+            except Exception as err:
+                print(err)
         return render(request, 'police/home.html',
                       {'name': db_funcs.get_police_by_username(request.session[USERNAME_FIELD]).name})
     else:
         return redirect('/police/')
 
+
 def mission(request):
     if not is_user_logged_in(request):
         return redirect('/police/')
-    
+
     police: Police = db_funcs.get_police_by_username(request.session[USERNAME_FIELD])
     mission = police.current_mission
     return render(request, 'police/mission.html', {'mission': mission})
+
 
 def sign_out(request):
     if is_user_logged_in(request):
@@ -64,10 +76,11 @@ def login_page(request):
     else:
         return render(request, 'police/login.html', {'form': form})
 
+
 def notifications(request):
     if not is_user_logged_in(request):
         return redirect('/police/')
-    
+
     police: Police = db_funcs.get_police_by_username(request.session[USERNAME_FIELD])
     message = police.message_from_server
     return render(request, 'police/notifications.html', {'message': message})

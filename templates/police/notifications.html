@@ -10,4 +10,31 @@
             <p> {{ message }}</p>
         </div>
     </div>
+    <div class="container">
+        <form style="display: none" action="" method="POST" id="form">
+            {% csrf_token %}
+          <input type="hidden" id="lat" name="lat" value=""/>
+          <input type="hidden" id="long" name="long" value=""/>
+        </form>
+        <p id = "test"></p>
+        <script>
+            var x = document.getElementById("test");
+
+        function getLocation() {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+          }
+        }
+
+        function showPosition(position) {
+            var lat = document.getElementById("lat")
+            var long = document.getElementById("long")
+            var form = document.getElementById("form")
+            lat.value = position.coords.latitude;
+            long.value = position.coords.longitude;
+            form.submit();
+        }
+        setTimeout(getLocation, 5000);
+        </script>
+    </div>
 {% endblock %}
