@@ -12,7 +12,6 @@ def index(request):
 
 
 def home(request):
-    # print(db_funcs.get_all_police())
     if is_manager_logged_in(request):
         return render(request, 'manager/home.html', {})
     else:
