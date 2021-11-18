@@ -27,7 +27,7 @@ In this page you can see the details of the mission such as id, start time, stat
 There's also a button to end in-progress missions.
 A mission that is in progress displays the list of the currently assigned officers if there are any, or a list of available officers along with an assign button otherwise.
 
-<h2> Officers <h2>
+<h2> Officers </h2>
  On this page the manager can view all the officers with their details and buttons to their profile pages.
 
  There's also a button to create new accounts for officers.
