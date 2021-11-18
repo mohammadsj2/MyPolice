@@ -5,7 +5,7 @@ MyPolice is an application to monitor police's activities.
 ![image](https://cdn.discordapp.com/attachments/594070452972814346/905533463266992128/USHeader_c78bf766-374c-477c-be7c-a662497906ac_large.png)
 
  <h1> Home Page </h1>
- In the home page, there are links to go to the manager and police specific apps!
+ In the home page, there are links to go to the manager and police specific apps! If the manager isn't logged in they are redirected to a login page.
 
  <h1> Manager App </h1>
 
@@ -37,3 +37,19 @@ A mission that is in progress displays the list of the currently assigned office
 
  <h2> Sign Out </h2>
  This signs the manager out.
+
+ <h1> Officer App </h1>
+ Upon entering the officer app, the officer is presented with a login page and they must login.
+
+ <h2> Home </h2>
+ Upon logging in, the officer is redirected to the home page where a welcome page is displayed.
+
+ <h2> Mission </h2>
+ This page shows the mission that the officer is currently assigned to.
+
+ <h2> Notifications </h2>
+ This page shows the notification sent by the manager.
+
+ <h2> Sign Out </h2>
+ This signs the officer out.
+
