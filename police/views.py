@@ -9,21 +9,24 @@ USERNAME_FIELD = "username"
 
 
 def index(request):
+    """
+
+    backend for rendering index page
+    redirects to login
+    """
+
     return redirect('/police/login')
 
 
 def home(request):
-    if is_user_logged_in(request):
-        if request.method == 'POST':
-            print(request.POST)
+    """
 
-            latitude = request.POST["lat"]
-            longitude = request.POST["long"]
-            try:
-                police = db_funcs.get_police_by_username(request.session[USERNAME_FIELD])
-                db_funcs.set_police_location(police, latitude + ', ' + longitude)
-            except Exception as err:
-                print(err)
+    backend for rendering the police home screen.
+    redirects to login page if user isn't logged in
+    updates officer location in database
+    """
+    if is_user_logged_in(request):
+        update_user_location(request)
         return render(request, 'police/home.html',
                       {'name': db_funcs.get_police_by_username(request.session[USERNAME_FIELD]).name})
     else:
@@ -31,21 +34,55 @@ def home(request):
 
 
 def mission(request):
+    """
+
+    backend for rendering the police mission screen.
+    redirects to login page if user isn't logged in
+    updates officer location in database
+    sends mission information to front-end
+    """
+
     if not is_user_logged_in(request):
         return redirect('/police/')
-
+    update_user_location(request)
     police: Police = db_funcs.get_police_by_username(request.session[USERNAME_FIELD])
     mission = police.current_mission
     return render(request, 'police/mission.html', {'mission': mission})
 
 
+def update_user_location(request):
+    """
+
+    updates user location based on request POST content
+    """
+    if request.method == 'POST':
+        print(request.POST)
+        latitude = request.POST["lat"]
+        longitude = request.POST["long"]
+        try:
+            police = db_funcs.get_police_by_username(request.session[USERNAME_FIELD])
+            db_funcs.set_police_location(police, latitude + ', ' + longitude)
+        except Exception as err:
+            print(err)
+
+
 def sign_out(request):
+    """
+
+    signs user out of current session
+    """
+
     if is_user_logged_in(request):
         del request.session[USERNAME_FIELD]
     return redirect('/police/')
 
 
 def login_authentication(username, password) -> bool:
+    """
+
+    authenticates the username and password using the database
+    """
+
     police = db_funcs.get_police_by_username(username)
     if police is None:
         return False
@@ -55,12 +92,20 @@ def login_authentication(username, password) -> bool:
 
 
 def is_user_logged_in(request):
+    """
+
+    checks if the user is logged in
+    """
+
     if request.session.get(USERNAME_FIELD, None) is None:
         return False
     return True
 
 
 def login_page(request):
+    """
+        backend for rendering the login page
+    """
     if request.method == 'POST':
         print(request.POST)
         form = LoginForm(request.POST)
@@ -78,9 +123,16 @@ def login_page(request):
 
 
 def notifications(request):
+    """
+
+    backend for rendering the police notifications screen.
+    redirects to login page if user isn't logged in
+    updates officer location in database
+    sends notification to front-end
+    """
     if not is_user_logged_in(request):
         return redirect('/police/')
-
+    update_user_location(request)
     police: Police = db_funcs.get_police_by_username(request.session[USERNAME_FIELD])
     message = police.message_from_server
     return render(request, 'police/notifications.html', {'message': message})
