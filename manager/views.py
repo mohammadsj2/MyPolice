@@ -8,10 +8,18 @@ MANAGER_USERNAME = 'manager-username'
 
 
 def index(request):
+    """
+    backend for rendering /manager url
+    redirects to login page
+    """
     return redirect('/manager/login/')
 
 
 def home(request):
+    """
+    backend for rendering the manager home screen.
+    redirects to login page if user isn't logged in
+    """
     if is_manager_logged_in(request):
         return render(request, 'manager/home.html', {})
     else:
@@ -19,6 +27,10 @@ def home(request):
 
 
 def sign_out(request):
+    """
+    backend for sign outing
+    redirects to index page
+    """
     if is_manager_logged_in(request):
         del request.session[MANAGER_USERNAME]
     return redirect('/manager/')
@@ -35,6 +47,10 @@ def is_manager_logged_in(request):
 
 
 def login_page(request):
+    """
+    backend for login page
+    if manager logged in: redirect home page
+    """
     if request.method == 'POST':
         print(request.POST)
         form = LoginForm(request.POST)
@@ -52,6 +68,9 @@ def login_page(request):
 
 
 def create_police(request):
+    """
+    backend for create police page
+    """
     op_done = False
     fail_message = ''
 
@@ -87,6 +106,9 @@ def create_police(request):
 
 
 def create_mission(request):
+    """
+    backend for create mission page
+    """
     op_done = False
     fail_message = ''
 
@@ -114,12 +136,18 @@ def create_mission(request):
 
 
 def policemen_list(request):
+    """
+    backend for policemen list page
+    """
     policemen = db_funcs.get_all_police()
     return render(request, 'manager/policemen_list.html',
                   {'policemen': policemen})
 
 
 def policemen_profile(request, username: str):
+    """
+    backend for policemen profile page
+    """
     op_done = False
     fail_message = ''
 
@@ -148,6 +176,10 @@ def policemen_profile(request, username: str):
 
 
 def mission_profile(request, mission_id):
+    """
+        backend for mission profile page
+        """
+
     if not is_manager_logged_in(request):
         return redirect('/manager/')
     op_done = False
@@ -179,11 +211,18 @@ def mission_profile(request, mission_id):
 
 
 def mission_list(request):
+    """
+    backend for mission list page
+    """
     missions = db_funcs.get_all_missions()
     return render(request, 'manager/mission_list.html', {'missions': missions})
 
 
 def end_mission(request, mission_id: int):
+    """
+    backend for ending mission
+    redirects to index page
+    """
     if not is_manager_logged_in(request):
         return redirect('/manager/')
 

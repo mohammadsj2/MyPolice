@@ -2,6 +2,8 @@ from django.urls import path
 
 from . import views
 
+# This file manages manager's urls
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('login/', views.login_page, name='login'),

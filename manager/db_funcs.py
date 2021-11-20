@@ -2,11 +2,15 @@ from .models import *
 from django.utils.timezone import now
 
 
+# In this file we create necessary functions which deal with our database
+
 def get_all_police():
     return Police.objects.all()
 
+
 def get_available_police():
     return Police.objects.filter(status='available')
+
 
 def get_police(id):
     return Police.objects.get(pk=id)
@@ -17,6 +21,7 @@ def get_police_by_username(username):
         return Police.objects.get(username=username)
     except Exception:
         return None
+
 
 def get_all_missions():
     return Mission.objects.all()

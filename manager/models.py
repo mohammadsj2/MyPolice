@@ -1,6 +1,8 @@
 from django.db import models
 
-# Create your models here.
+
+# # In this file we create necessary models for our database
+
 class Mission(models.Model):
     id = models.IntegerField(unique=True, primary_key=True)
     location = models.CharField(max_length=40)
@@ -11,6 +13,7 @@ class Mission(models.Model):
     def __str__(self) -> str:
         return "|loc: " + self.location + "|desc: " + self.description + "|"
 
+
 class Police(models.Model):
     username = models.CharField(max_length=200, unique=True)
     password = models.CharField(max_length=200)
@@ -19,12 +22,14 @@ class Police(models.Model):
     birthday = models.DateField(max_length=200, null=True)
     location = models.CharField(max_length=1000, blank=True, null=True)
     status = models.CharField(max_length=200, blank=True, null=True, default='available')
-    current_mission = models.ForeignKey(Mission, on_delete=models.CASCADE, related_name='current_police', blank=True, null=True)
+    current_mission = models.ForeignKey(Mission, on_delete=models.CASCADE, related_name='current_police', blank=True,
+                                        null=True)
     missions = models.ManyToManyField(Mission, through='MissionPolice', related_name='all_police')
     message_from_server = models.CharField(max_length=2000, null=True, blank=True)
 
     def __str__(self) -> str:
         return f'{self.name}'
+
 
 class MissionPolice(models.Model):
     mission = models.ForeignKey(Mission, on_delete=models.CASCADE)
@@ -34,5 +39,3 @@ class MissionPolice(models.Model):
 
     def __str__(self) -> str:
         return str(self.mission) + " " + str(self.police) + " " + str(self.join_time)
-
-

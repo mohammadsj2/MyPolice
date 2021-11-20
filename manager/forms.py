@@ -7,6 +7,8 @@ from manager.models import Police
 
 # from location_field.forms.plain import PlainLocationField
 
+# In this file we create necessary forms
+
 class LoginForm(forms.Form):
     username = forms.CharField(label='Username', max_length=100)
     password = forms.CharField(widget=forms.PasswordInput())
