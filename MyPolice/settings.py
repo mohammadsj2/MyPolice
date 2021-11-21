@@ -24,10 +24,9 @@ MEDIA_URL = '/Media/'
 SECRET_KEY = 'django-insecure-7go$em+yr=bdafj9rn($#^=kof%z+nk$s&*!+v98i&ec)(p+9c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['mypolice-banana.fandogh.cloud', '.localhost', '127.0.0.1', '[::1]']
 
 # Application definition
 
@@ -81,7 +80,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'MyPolice.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -91,7 +89,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -111,7 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -124,7 +120,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
