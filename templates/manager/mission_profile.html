@@ -4,26 +4,27 @@
 
 {% block content %}
     <br/><br/><br/>
-    <div class="container">
+    <div class="container text-center">
         <p>Id: {{ mission.id }}</p>
         <p>Start time: {{ mission.start_time }}</p>
         {% if mission.end_time %}
           <p>End time: {{ mission.end_time }}</p>
             <p> Mission status: finished</p>
-        {% else %}
+        {% elif assigned_police %}
             <p> Mission status: in progress</p>
+        {% else %}
+            <p> Mission status: waiting for assignment </p>
         {% endif %}
         <p>Description: {{ mission.description }}</p>
     </div>
-    <div class="container">
+    <div class="container text-center">
         {% if mission.end_time == null %}
-            <button type="button" class="btn btn-info">
-                <a href='/manager/mission_profile/{{ mission.id }}/end_mission' type="button" class="btn btn-link">End
+                <a href='/manager/mission_profile/{{ mission.id }}/end_mission' type="button" class="btn btn-danger">End
                     Mission</a>
-            </button>
         {% endif %}
+        <p></p>
     </div>
-    <div class="container">
+    <div class="container text-center">
         {% if not assigned_police%}
             <form target="" method='post'>
                 {% csrf_token %}
