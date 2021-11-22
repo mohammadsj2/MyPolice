@@ -1,3 +1,19 @@
+# Requirements
+Before you clone the project make sure you have the following requirements installed.
+<h2> Python </h2>
+Install Python 3.7 or higher, you can use the command <br>
+!pip install Python
+<h2> Django </h2>
+Install Django, you can use the command<br>
+!pip install django <br>
+Alternatively if you want to make a virtual environment along with it you can use <br>
+!pipenv install django
+
+# Starting the server
+After installing the requirements you can run the application on your server by using <br>
+!python manage.py runserver<br>
+in the directory of the manage.py file.
+
 # Table of Contents
 
 - [Home](#Home)
