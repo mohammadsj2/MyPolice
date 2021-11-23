@@ -26,7 +26,8 @@ def home(request):
     updates officer location in database
     """
     if is_user_logged_in(request):
-        update_user_location(request)
+        if update_user_location(request):
+            return redirect("/police/home")
         return render(request, 'police/home.html',
                       {'name': db_funcs.get_police_by_username(request.session[USERNAME_FIELD]).name})
     else:
@@ -44,7 +45,8 @@ def mission(request):
 
     if not is_user_logged_in(request):
         return redirect('/police/')
-    update_user_location(request)
+    if update_user_location(request):
+        return redirect('/police/mission')
     police: Police = db_funcs.get_police_by_username(request.session[USERNAME_FIELD])
     mission = police.current_mission
     return render(request, 'police/mission.html', {'mission': mission})
@@ -64,7 +66,9 @@ def update_user_location(request):
             db_funcs.set_police_location(police, latitude + ', ' + longitude)
         except Exception as err:
             print(err)
-
+        return True
+    else :
+        return False
 
 def sign_out(request):
     """
@@ -132,7 +136,8 @@ def notifications(request):
     """
     if not is_user_logged_in(request):
         return redirect('/police/')
-    update_user_location(request)
+    if update_user_location(request):
+        return redirect('/police/notifications')
     police: Police = db_funcs.get_police_by_username(request.session[USERNAME_FIELD])
     message = police.message_from_server
     return render(request, 'police/notifications.html', {'message': message})

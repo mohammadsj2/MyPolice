@@ -6,9 +6,11 @@
     <br/><br/><br/>
     <div class="card w-75 text-center mb-3 mx-auto" style="max-width: 22rem;">
         <h5 class="card-header"> Last message</h5>
+        {% if message %}
         <div class="card-body">
             <p> {{ message }}</p>
         </div>
+        {% endif %}
     </div>
     <div class="container">
         <form style="display: none" action="" method="POST" id="form">
