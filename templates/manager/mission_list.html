@@ -3,44 +3,32 @@
 {% block title %} Missions List {% endblock %}
 
 {% block content %}
-    <br/><br/><br/>
-    <div class="container text-center">
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                <th>
-                    Mission id
-                </th>
-                <th>
-                    Mission location
-                </th>
-                <th>
-                    Description
-                </th>
-                </tr>
-            </thead>
-            <tbody>
+    <br/>
+    <div class="col card container" style="max-width: 50rem;background: rgb(234,242,255);">
+    <div class="container-sm">
+        <br>
+        <h1>Mission List</h1>
+    <br>
+        <div class="list-group">
             {% for mission in missions %}
-
-                <tr>
-
-                        <th>
-                            <a href="/manager/mission_profile/{{ mission.id }}" type="button" class="btn btn-info" style="width: 50pt">{{ mission.id }}</a>
-                        </th>
-                        <th>
-                            {{ mission.location }}
-                        </th>
-                        <th>
-                            {{ mission.description }}
-                        </th>
-
-                </tr>
-
+                <a href="/manager/mission_profile/{{ mission.id }}" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Mission #{{ mission.id }}</h5>
+                    </div>
+                    <p class="mb-1">{{ mission.description }}</p>
+                    <small class="text-muted">
+                        <i class="bi bi-geo-alt"></i>
+                        Location: {{ mission.location }}</small>
+                </a>
             {% endfor %}
-            </tbody>
-        </table>
+        </div>
     </div>
+    <br>
     <div class="container">
-        <a href='/manager/create_mission' type="button" class="btn btn-primary">Add Mission</a>
+        <a href='/manager/create_mission' type="button" class="btn btn-primary">Create Mission</a>
     </div>
+    <br>
+    </div>
+    <br><br>
+
 {% endblock %}

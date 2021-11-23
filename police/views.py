@@ -49,7 +49,8 @@ def mission(request):
         return redirect('/police/mission')
     police: Police = db_funcs.get_police_by_username(request.session[USERNAME_FIELD])
     mission = police.current_mission
-    return render(request, 'police/mission.html', {'mission': mission})
+    return render(request, 'police/mission.html',
+                  {'mission': mission, 'name': db_funcs.get_police_by_username(request.session[USERNAME_FIELD]).name})
 
 
 def update_user_location(request):
@@ -67,8 +68,9 @@ def update_user_location(request):
         except Exception as err:
             print(err)
         return True
-    else :
+    else:
         return False
+
 
 def sign_out(request):
     """
@@ -123,7 +125,8 @@ def login_page(request):
     if is_user_logged_in(request):
         return redirect('/police/home/')
     else:
-        return render(request, 'police/login.html', {'form': form})
+        return render(request, 'police/login.html',
+                      {'form': form})
 
 
 def notifications(request):
@@ -140,4 +143,5 @@ def notifications(request):
         return redirect('/police/notifications')
     police: Police = db_funcs.get_police_by_username(request.session[USERNAME_FIELD])
     message = police.message_from_server
-    return render(request, 'police/notifications.html', {'message': message})
+    return render(request, 'police/notifications.html',
+                  {'message': message, 'name': db_funcs.get_police_by_username(request.session[USERNAME_FIELD]).name})

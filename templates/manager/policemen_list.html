@@ -3,40 +3,30 @@
 {% block title %} PolicemenList {% endblock %}
 
 {% block content %}
-    <br/><br/><br/>
-    <div class="container">
-        <table class="table text-center">
-            <thead>
-            <tr>
-                <th>
-                    Username
-                </th>
-                <th>
-                    Officer Name
-                </th>
-            </tr>
-            </thead>
-            <tbody>
+    <br/>
+    <div class="col card container" style="max-width: 50rem;background: rgb(234,242,255);">
+    <div class="container-sm">
+    <br>
+    <h1>Officer List</h1>
+    <br>
+        <div class="list-group">
             {% for police in policemen %}
-
-                <tr>
-
-                    <th>
-                        <a href="/manager/policemen_profile/{{ police.username }}" type="button" class="btn btn-info">
-                            {{ police.username }}
-                        </a>
-                    </th>
-                    <th>
-                        {{ police.name }}
-                    </th>
-
-                </tr>
-
+                <a href="/manager/policemen_profile/{{ police.username }}" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ police.username }}</h5>
+                    </div>
+                    <p class="mb-1">{{ police.name }}</p>
+                    <small class="text-muted">Birthday: {{ police.birthday }}</small>
+                </a>
             {% endfor %}
-            </tbody>
-        </table>
+        </div>
     </div>
+
+    <br>
     <div class="container">
-        <a href='/manager/create_police' type="button" class="btn btn-primary">Create new officer account</a>
+        <a href='/manager/create_police' type="button" class="btn btn-primary">Create Officer Account</a>
     </div>
+    <br>
+    </div>
+    <br>
 {% endblock %}

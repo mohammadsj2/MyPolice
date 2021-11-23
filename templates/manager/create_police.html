@@ -1,7 +1,6 @@
 {% extends "manager/base.html" %}
 
 {% block title %} Create Officer {% endblock %}
-
 {% block content %}
 
     <br/><br/><br/>
@@ -22,22 +21,18 @@
             {% endif %}
             <form action="" method="post">
                 {% csrf_token %}
-                <table class="card-text text-center">
+                <p class="card-text">
                     {% for field in form %}
-                        <p class="card-text">
-                            {{ field.errors }}
-                            <tr>
-                                <th>
-                                    <label for="{{ field.id_for_label }}"> {{ field.name }}</label>
-                                </th>
-                                <th>{{ field }}</th>
-                            </tr>
-                        </p>
+
+                        <div class="form-floating mb-3">
+                            {{ field }}
+                            <label for="{{ field.id_for_label }}"> {{ field.label }}</label>
+                        </div>
+                        {{ field.errors }}
                     {% endfor %}
-                </table>
+                </p>
                 <input type="submit" class="btn btn-primary" value="Create">
             </form>
         </div>
     </div>
-
 {% endblock %}
