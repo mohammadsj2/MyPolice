@@ -142,6 +142,9 @@ def policemen_list(request):
     """
     backend for policemen list page
     """
+    if not is_manager_logged_in(request):
+        return redirect('/manager/')
+
     policemen = db_funcs.get_all_police()
     return render(request, 'manager/policemen_list.html',
                   {'policemen': policemen})
@@ -218,6 +221,9 @@ def mission_list(request):
     """
     backend for mission list page
     """
+    if not is_manager_logged_in(request):
+        return redirect('/manager/')
+
     missions = db_funcs.get_all_missions()
     return render(request, 'manager/mission_list.html', {'missions': missions})
 
