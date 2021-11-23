@@ -131,6 +131,9 @@ def create_mission(request):
     else:
         form = CreateMissionForm()
 
+    if op_done:
+        form = CreateMissionForm()
+
     return render(request, 'manager/create_mission.html',
                   {'form': form, 'op_done': op_done, 'fail_message': fail_message})
 
@@ -205,9 +208,10 @@ def mission_profile(request, mission_id):
                 fail_message = str(err)
     else:
         form = PoliceAssignForm()
+    available_police = form.fields['police'].queryset
     return render(request, 'manager/mission_profile.html',
                   {'mission': mission, 'assigned_police': assigned_police, 'form': form, 'op_done': op_done,
-                   'fail_message': fail_message})
+                   'fail_message': fail_message, 'available_police': available_police})
 
 
 def mission_list(request):
@@ -228,4 +232,4 @@ def end_mission(request, mission_id: int):
 
     mission = db_funcs.get_mission(id=mission_id)
     db_funcs.end_mission(m=mission, end_time=datetime.now())
-    return redirect('/manager/')
+    return redirect('/manager/mission_profile/' + str(mission_id))

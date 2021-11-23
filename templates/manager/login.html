@@ -3,9 +3,9 @@
 {% block title %}Login{% endblock %}
 
 {% block navbar %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" xmlns="http://www.w3.org/1999/html">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: rgb(61,73,133);">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">MyPolice: Manager Panel</a>
+            <a class="navbar-brand" href="/">MyPolice: Manager Panel</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +14,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/manager/">Home</a>
+                        <a class="nav-link" aria-current="page" href="/manager/">
+                            <i class="bi bi-house-fill"></i>
+                            Home</a>
                     </li>
                 </ul>
             </div>
@@ -24,25 +26,21 @@
 
 {% block content %}
     <br/><br/><br/>
-    <div class="card w-75 text-center mb-3 mx-auto" style="max-width: 22rem;">
-        <h5 class="card-header">Login</h5>
+    <div class="card w-75 text-center mb-3 mx-auto" style="max-width: 22rem;background: rgb(234,242,255);">
+        <h5 class="card-header" style="background: rgb(62,74,134);color:white;">Login</h5>
         <div class="card-body">
             <form action="" method="post">
                 {% csrf_token %}
-                <table class="card-text text-center">
+                <p class="card-text">
                     {% for field in form %}
-                        <p class="card-text">
-                            {{ field.errors }}
-                            <tr>
-                                <th>
-                                    <label for="{{ field.id_for_label }}"> {{ field.name }}</label>
-                                </th>
-                                <th>{{ field }}</th>
-                            </tr>
-                        </p>
+                        <div class="form-floating mb-3">
+                            {{ field }}
+                            <label for="{{ field.id_for_label }}"> {{ field.label }}</label>
+                        </div>
+                        {{ field.errors }}
                     {% endfor %}
-                </table>
-                    <input type="submit" class="btn btn-primary" value="Login">
+                </p>
+                <input type="submit" class="btn btn-primary" value="Login">
             </form>
         </div>
     </div>

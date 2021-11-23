@@ -1,57 +1,124 @@
 {% extends "manager/base.html" %}
 
-{% block title %} {{ mission.id }} {% endblock %}
+{% block title %}  Mission {{ mission.id }} {% endblock %}
 
 {% block content %}
     <br/><br/><br/>
-    <div class="container text-center">
-        <p>Id: {{ mission.id }}</p>
-        <p>Start time: {{ mission.start_time }}</p>
-        {% if mission.end_time %}
-          <p>End time: {{ mission.end_time }}</p>
-            <p> Mission status: finished</p>
-        {% elif assigned_police %}
-            <p> Mission status: in progress</p>
-        {% else %}
-            <p> Mission status: waiting for assignment </p>
-        {% endif %}
-        <p>Description: {{ mission.description }}</p>
-    </div>
-    <div class="container text-center">
-        {% if mission.end_time == null %}
-                <a href='/manager/mission_profile/{{ mission.id }}/end_mission' type="button" class="btn btn-danger">End
-                    Mission</a>
-        {% endif %}
-        <p></p>
-    </div>
-    <div class="container text-center">
-        {% if not assigned_police%}
-            <form target="" method='post'>
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input type='submit' value='submit' class="btn btn-primary">
-            </form>
-        {% else %}
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>
-                        Assigned Police
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for police in assigned_police %}
+    <div class="container" style="max-width: 50rem;">
+        <div class="row">
+
+            <div class="col w-75 mb-3 mx-auto text-center" style="max-width: 25rem;">
+
+                <h5 class="card-header" style="background: rgb(62,74,134);color: white;"> Police</h5>
+                <table class="table table-hover" style="background: rgb(234,242,255);color: white;color: black;">
                     <tr>
                         <th>
-                            {{ police.name }}
+                            Start Time
                         </th>
+                        <td>
+                    <span class="badge bg-dark">
+                    <i class="bi bi-calendar"></i>
+                    {{ mission.start_time }}
+                    </span>
+                        </td>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        {% endif %}
+                    {% if mission.end_time %}
+                        <tr>
+                            <th>
+                                End Time
+
+                            </th>
+                            <td>
+                        <span class="badge bg-dark">
+                        <i class="bi bi-calendar"></i>
+                        {{ mission.end_time }}
+                        </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Mission Status
+                            </th>
+                            <td>
+                                <span class="badge bg-success">Finished</span>
+                            </td>
+                        </tr>
+                    {% elif assigned_police %}
+                        <tr>
+                            <th>
+                                Mission Status
+                            </th>
+                            <td>
+                                <span class="badge bg-info">In Progress</span>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <th>
+                                Mission Status
+                            </th>
+                            <td>
+                                <span class="badge bg-warning text-dark">Waiting For Assignment</span>
+
+                            </td>
+                        </tr>
+                    {% endif %}
+                    <tr>
+                        <th>
+                            Description
+                        </th>
+                        <td>
+                            {{ mission.description }}
+                        </td>
+                    </tr>
+                </table>
+                <div class="container text-center">
+                    {% if mission.end_time == null %}
+                        <a href='/manager/mission_profile/{{ mission.id }}/end_mission' type="button"
+                           class="btn btn-danger">End
+                            Mission</a>
+                    {% endif %}
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="col card container text-center" style="max-width: 20rem;background: rgb(234,242,255);">
+                {% if not assigned_police and mission.end_time == null %}
+                    <form target="" method='post'>
+                        {% csrf_token %}
+                        <p><h4><span class="badge bg-success">Available Officers</span></h4>
+                        <select name="police" required id="id_police" multiple class="form-select">
+                            {% for police_entry in available_police %}
+                                <option value={{ police_entry.id }}>{{ police_entry.name }}</option>
+                            {% endfor %}
+                        </select>
+                        </p>
+                        <p style="font-size: 12px;">Use <kbd>CTRL</kbd> to choose multiple choices.</p>
+                        <input type='submit' value='submit' class="btn btn-primary">
+                    </form>
+                    <br>
+                {% elif assigned_police %}
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>
+                                <h5><span class="badge bg-success">Assigned Police</span></h5>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for police in assigned_police %}
+                            <tr>
+                                <th>
+                                    {{ police.name }}
+                                </th>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
     </div>
-
-
+    <br>
 {% endblock %}
